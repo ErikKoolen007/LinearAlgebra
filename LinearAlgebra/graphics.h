@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include "vector_2d.h"
+#include "matrix.h"
 
 class graphics
 {
@@ -23,5 +24,6 @@ public:
 	}
 	void draw_coordinate_grid() const;
 	void draw_vector(vector_2d& vector, float start_x = 0, float start_y = 0) const;
+	void draw_matrix(matrix<float> m) const;
 };
 

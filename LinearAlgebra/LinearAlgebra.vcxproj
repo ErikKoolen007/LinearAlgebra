@@ -120,10 +120,12 @@
   <ItemGroup>
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="LinearAlgebra.cpp" />
+    <ClCompile Include="matrix.cpp" />
     <ClCompile Include="vector_2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="vector_2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

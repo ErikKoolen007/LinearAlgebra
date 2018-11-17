@@ -2,6 +2,7 @@
 #include <iostream>
 #include "graphics.h"
 #include "vector_2d.h"
+#include "matrix.h"
 
 //undef (macro)main to be able to let the linker find the non SDL main.
 #undef main
@@ -31,7 +32,9 @@ void run()
 				//Draw coordinate grid
 				graphics.draw_coordinate_grid();
 
-				//Draw vectors
+				//Draw vectors example 
+				#pragma region
+				/*
 				vector_2d vector1{ 5, 5 };
 				graphics.draw_vector(vector1);
 				vector1.scale(1.5f);
@@ -45,7 +48,20 @@ void run()
 				vector_2d vector2{ 4, 3 };
 				vector2.subtract(vector_2d{ 2, -3 });
 				graphics.draw_vector(vector2, -3);
-				
+				*/
+				#pragma endregion Draw vectors example
+
+				matrix<float> m;
+				std::vector<vector_2d> vectors;
+				vectors.emplace_back(-0.5f, -0.5f);
+				vectors.emplace_back(0.5f, -0.5f);
+				vectors.emplace_back(1.5f, 1.5f);
+				vectors.emplace_back(-1.5f, 1.5f);
+				vectors.emplace_back(-5.0f, -5.0f);
+				m.add_vector_list(vectors);
+
+				graphics.draw_matrix(m);
+
 				//Update screen
 				SDL_RenderPresent(renderer);
 

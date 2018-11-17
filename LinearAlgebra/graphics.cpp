@@ -16,12 +16,19 @@ void graphics::draw_coordinate_grid() const
 	//Draw black horizontal and vertical line
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderDrawLine(renderer_, zero_, center_y_, end_x_, center_y_);
+	SDL_RenderDrawLine(renderer_, zero_, center_y_ + 1, end_x_, center_y_ + 1);
+	SDL_RenderDrawLine(renderer_, zero_, center_y_ - 1, end_x_, center_y_ - 1);
 	SDL_RenderDrawLine(renderer_, center_x_, zero_, center_x_, end_y_);
+	SDL_RenderDrawLine(renderer_, center_x_ + 1, zero_, center_x_ + 1, end_y_);
+	SDL_RenderDrawLine(renderer_, center_x_ - 1, zero_, center_x_ - 1, end_y_);
 	//Draw borders
 	SDL_RenderDrawLine(renderer_, zero_, zero_, end_x_, zero_);
 	SDL_RenderDrawLine(renderer_, zero_, end_y_, end_x_, end_y_);
 	SDL_RenderDrawLine(renderer_, zero_, zero_, zero_, end_y_);
 	SDL_RenderDrawLine(renderer_, end_x_, zero_, end_x_, end_y_);
+
+	/*SDL_SetRenderDrawColor(renderer_, 255, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_RenderDrawPoint(renderer_, 0.5, 0.5);*/
 }
 
 void graphics::draw_vector(vector_2d& vector, float start_x, float start_y) const
@@ -31,4 +38,25 @@ void graphics::draw_vector(vector_2d& vector, float start_x, float start_y) cons
 
 	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderDrawLine(renderer_, starting_x, starting_y, starting_x + vector.get_x() * step_, starting_y - vector.get_y() * step_);
+}
+
+void graphics::draw_matrix(matrix<float> m) const
+{
+	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, SDL_ALPHA_OPAQUE);
+
+	for (unsigned i = 0; i < m.get_cols(); i++) {
+		
+		if(i != 0)
+		{
+			const int previous_point_x = center_x_ + m(0, i - 1) * step_;
+			const int previous_point_y = center_y_ - m(1, i - 1) * step_;
+			const int current_point_x = center_x_ + m(0, i) * step_;
+			const int current_point_y = center_y_ - m(1, i) * step_;
+			
+			SDL_RenderDrawLine(renderer_, previous_point_x, previous_point_y, current_point_x, current_point_y);
+		}
+	}
+	SDL_RenderDrawLine(renderer_, 
+		center_x_ + m(0, 0) * step_, center_y_ - m(1, 0) * step_, 
+		center_x_ + m(0, m.get_cols() - 1) * step_, center_y_ - m(1, m.get_cols() - 1) * step_);
 }
