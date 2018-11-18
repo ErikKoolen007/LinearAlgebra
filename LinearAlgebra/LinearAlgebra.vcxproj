@@ -120,7 +120,6 @@
   <ItemGroup>
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="LinearAlgebra.cpp" />
-    <ClCompile Include="matrix.cpp" />
     <ClCompile Include="vector_2d.cpp" />
   </ItemGroup>
   <ItemGroup>
