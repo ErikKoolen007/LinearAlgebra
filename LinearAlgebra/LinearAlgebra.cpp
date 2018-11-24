@@ -3,6 +3,7 @@
 #include "graphics.h"
 #include "vector_2d.h"
 #include "matrix.h"
+#include "utilities.h"
 
 //undef (macro)main to be able to let the linker find the non SDL main.
 #undef main
@@ -51,21 +52,26 @@ void run()
 				*/
 				#pragma endregion Draw vectors example
 
-				matrix<float> m;
 				std::vector<vector_2d> vectors;
-				/*vectors.emplace_back(-0.5f, -0.5f);
-				vectors.emplace_back(0.5f, -0.5f);
+				vectors.emplace_back(-0.5f, -0.5f);
+				vectors.emplace_back(0.5f, -2.5f);
 				vectors.emplace_back(1.5f, 1.5f);
 				vectors.emplace_back(-1.5f, 1.5f);
-				vectors.emplace_back(-5.0f, -5.0f);*/
-				vectors.emplace_back(1, 1);
+				vectors.emplace_back(-2.0f, -2.0f);
+				/*vectors.emplace_back(1, 1);
 				vectors.emplace_back(3, 1);
 				vectors.emplace_back(3, 3);
-				vectors.emplace_back(1, 3);
-				m.add_vector_list(vectors);
+				vectors.emplace_back(1, 3);*/
+				matrix<float> m{ vectors };
 
 				graphics.draw_matrix(m);
-				m.translate_2d_vector_matrix(-2, -2).scale_2d_vector_matrix(2, 2).translate_2d_vector_matrix(2, 2);
+				vector_2d center = utilities::get_center_2d_vector_matrix(m);
+				graphics.draw_point(center);
+				//m.translate_2d_vector_matrix(-center.get_x(), -center.get_y()).scale_2d_vector_matrix(2, 2).translate_2d_vector_matrix(center.get_x(), center.get_y());
+				m.translate_2d_vector_matrix(-center.get_x(), -center.get_y()).rotate_2d_vector_matrix(45).translate_2d_vector_matrix(center.get_x(), center.get_y()).translate_2d_vector_matrix(4,0);
+				graphics.draw_matrix(m);
+				m.translate_2d_vector_matrix(-4, 0);
+				m.translate_2d_vector_matrix(-center.get_x(), -center.get_y()).rotate_2d_vector_matrix(-90).translate_2d_vector_matrix(center.get_x(), center.get_y()).translate_2d_vector_matrix(-4,0);
 				graphics.draw_matrix(m);
 
 				//Update screen

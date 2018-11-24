@@ -25,5 +25,6 @@ public:
 	void draw_coordinate_grid() const;
 	void draw_vector(vector_2d& vector, float start_x = 0, float start_y = 0) const;
 	void draw_matrix(matrix<float> m) const;
+	void draw_point(vector_2d& vector) const;
 };
 

@@ -60,3 +60,10 @@ void graphics::draw_matrix(matrix<float> m) const
 		center_x_ + m(0, 0) * step_, center_y_ - m(1, 0) * step_, 
 		center_x_ + m(0, m.get_cols() - 1) * step_, center_y_ - m(1, m.get_cols() - 1) * step_);
 }
+
+void graphics::draw_point(vector_2d& vector) const
+{
+	SDL_SetRenderDrawColor(renderer_, 255, 0, 0, SDL_ALPHA_OPAQUE);
+
+	SDL_RenderDrawPoint(renderer_, center_x_ + vector.get_x() * step_, center_y_ - vector.get_y() * step_);
+}
